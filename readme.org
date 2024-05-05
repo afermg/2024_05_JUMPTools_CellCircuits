@@ -6,8 +6,8 @@ Either use =nix flakes + direnv= for an automated setup or run the setup.
 * Setup
 #+begin_src shell
 python -m venv .venv
-direnv allow .
 pip install git+https://github.com/remymuller/pdf2keynote.git
+source activate .venv/bin/activate
 #+end_src
 
 * Usage
