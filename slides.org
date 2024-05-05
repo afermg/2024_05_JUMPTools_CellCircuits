@@ -66,17 +66,11 @@
 - *Publish results*: =Datasette= is a Python libary to visualise, query and edit databases.
 
 ** What else produces similar morphologies?
-:PROPERTIES:
-:BEAMER_ACT: [<+->]
-:END:
 =matches=: Find the most similar (and dissimilar) perturbations.
 #+ATTR_LATEX: :width 0.9\textwidth
 [[./imgs/simile.jpg]]
 ** What else produces similar morphologies?
 ** What are the distinctive features of *X*-perturbed cells?
-:PROPERTIES:
-:BEAMER_ACT: [<+->]
-:END:
 =feature=: Find the most distinctive features of a perturbation, or amongst all.
 #+ATTR_LATEX: :width 0.9\textwidth
 [[./imgs/feature.jpg]]
@@ -85,15 +79,11 @@
 =gallery=: Explore all the images with an associated profile.
 #+ATTR_LATEX: :width 0.9\textwidth
 [[./imgs/gallery.jpg]]
-:PROPERTIES:
-:BEAMER_ACT: [<+->]
-:END:
 ** How do cells affected by *X* look?
 ** Does *X* have a different name in other databases?
 =broad_babel=: Translates IDs (JUMP, Symbol/InChiKey, Entrez id, Broad) and which are controls.
 #+ATTR_LATEX: :width 0.9\textwidth
 [[./imgs/babel.jpg]]
-
 ** To summarise the available data
 :PROPERTIES:
 :BEAMER_opt: shrink=35
