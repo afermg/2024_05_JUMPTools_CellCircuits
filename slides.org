@@ -6,20 +6,14 @@
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
 
 * JUMP Cell Painting
-Provide scientists with complementary throughput data.
-** The different levels of data provide distinct challenges
+** Scale and diversity of the data poses a challenge
+We produced multipletypes of data.
 - Images
 - Processed morphological profiles
 - Metadata linking images and profiles
-- Tools to anal
+- Notebooks, tools and tutorials
 
-** Is even accessing data a challenge?
-\pause
-#+begin_center
-#+latex: {\Huge{Yes.}}
-#+end_center
-
-** Is it really that hard to access/process JUMP data?
+** Why is this a problem of scale?
 # :PROPERTIES:
 # :BEAMER_ACT: [<+->]
 # :END:
@@ -40,8 +34,8 @@ Provide scientists with complementary throughput data.
 # - What are previous analyses and their conclusions?
 # - How can we evaluate
 
-* We aim to help biologists further their research
-** Some use cases
+* We aim to help scientists further their research
+** We use our own use-cases to make the data useful
 :PROPERTIES:
 :BEAMER_ACT: [<+>]
 :END:
@@ -52,28 +46,31 @@ Provide scientists with complementary throughput data.
 - What are the distinctive features of *X*-perturbed cells?
 - Can my *X* be found under a different name?
 
-** We preprocess data and publish it via Datasette
+** Ease of access: We preprocess data publish it using WebAssembly
 :PROPERTIES:
 :BEAMER_ACT: [<+>]
 :END:
 =jump_rr= (JUMP Round-Robin) is our Python tool to perform pairwise computations on profiles or features using the GPU. It also processes metadata to build whole image paths.
 
-=Datasette= is a Python libary to visualise, query and edit databases; it is deployable via WebAssembly (runs on the browser).
+=Datasette= is a Python libary to visualise, query and edit databases.
 
-** How do cells affected by *X* look?
-=gallery=: Explore all the images with an associated profile.
-[[./imgs/gallery.jpg]]
 ** What else produces similar morphologies?
-=simile=: Find the most similar (and dissimilar) perturbations.
-[[./imgs/simile.jpg]]
+=matches=: Find the most similar (and dissimilar) perturbations.
+** What else produces similar morphologies?
+# [[./demos/crispr_match.mp4]]
 ** What are the distinctive features of *X*-perturbed cells?
 =feature=: Find the most distinctive features of a perturbation, or amongst all.
-[[./imgs/feature.jpg]]
-** Does *X* have an alternative identity?
+** What are the distinctive features of *X*-perturbed cells?
+# [[./demos/orf_feature.mp4]]
+** How do cells affected by *X* look?
+=gallery=: Explore all the images with an associated profile.
+** How do cells affected by *X* look?
+# [[./demos/compound_gallery.mp4]]
+** Does *X* have a different name in other databases?
 =broad_babel=: Translates IDs (JUMP, Symbol/InChiKey, Entrez id, Broad) and which are controls.
 [[./imgs/babel.jpg]]
 
-** Summary of all websites
+** To summarise the available data
 :PROPERTIES:
 :BEAMER_opt: shrink=35
 :END:
@@ -82,7 +79,7 @@ Provide scientists with complementary throughput data.
 |                |                                     |                                               |                                                         |
 |                |                                     |                                               |                                                         |
 |                |                                     |                                               |                                                         |
-| Perturbation   | Similar perturbations               | Distinctive features                          | Images                                                  |
+| Perturbation   | Match perturbations                 | Distinctive features                          | Images                                                  |
 |----------------+-------------------------------------+-----------------------------------------------+---------------------------------------------------------|
 | Overexpression | [[https://broad.io/orf][orf]]       | [[https://broad.io/orf_feature][orf_feature]] | [[https://broad.io/orf_gallery][orf_gallery]]           |
 | Knocked-Out    | [[https://broad.io/crispr][crispr]] | WIP                                           | [[https://broad.io/crispr_gallery][crispr_gallery]]     |
@@ -117,27 +114,24 @@ Fetch a subset of images associated to a perturbation. Optionally, include their
 - jump-dti: Fetch data from drug-target interaction
 - cpg-data: Fetch images for any CellPainting data
 
+* Final remarks
 ** JUMP central concentrates knowledge
 [[./imgs/jump_central.jpg]]
-
-* All of JUMP in one place
-* Final remarks
 ** Conclusions
 - Big projects beget big complex systems, there is a way
 - Our current toolset makes it much easier to leverage datasets
-** September Hackathon
+** We will host a JUMP Hackathon in September
 [[./imgs/poster.jpg]]
-
-
 ** Acknowledgements
-- Carpenter-Singh Lab
-  Anne carpenter
-  Shantanu Singh
-  Adit Shah
-  Ankur Kumar
-  Alex Kalinin
-  Niranj
-  John Arevalo
+*** Imaging Platform
+  - Anne carpenter
+  - Shantanu Singh
+  - Adit Shah
+  - Ankur Kumar
+  - Alex Kalinin
+  - Niranj
+  - John Arevalo
+  - Beth Cimini
 
-- Cimini Lab
-  Beth Cimini
+*** .
+[[./imgs/elevator_selfie.jpg]]
