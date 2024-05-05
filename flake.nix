@@ -1,4 +1,3 @@
-
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
@@ -23,11 +22,6 @@
               system = system;
               config.allowUnfree = true;
             };
-
-            mpkgs = import inputs.nixpkgs_master {
-              system = system;
-              config.allowUnfree = true;
-            };
           in
           {
             default = devenv.lib.mkShell {
@@ -35,7 +29,7 @@
               modules = [
                 {
                   packages = with pkgs; [
-                    python
+                    python310
                   ];
                   enterShell = ''
                     if [ ! -d ".venv" ]; then
