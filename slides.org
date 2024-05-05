@@ -1,13 +1,19 @@
-#+title: Diving into JUMP Cellpainting data: Facilitating novel discoveries through accessible tools
+#+title: Diving into JUMP Cell Painting data: Facilitating novel discoveries through accessible tools
 #+OPTIONS: ^:nil H:2 num:t toc:nil
 #+LaTeX_CLASS: beamer
 #+BEAMER_THEME: metropolis
 #+BEAMER_FRAME_LEVEL: 2
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
 
-* Current JUMP toolkit
-** Is it really that hard to access/process JUMP data?
+* JUMP Cell Painting
+Provide scientists with complementary throughput data.
+** The different levels of data provide distinct challenges
+- Images
+- Processed morphological profiles
+- Metadata linking images and profiles
+- Tools to anal
 
+** Is even accessing data a challenge?
 \pause
 #+begin_center
 #+latex: {\Huge{Yes.}}
@@ -30,11 +36,12 @@
   - How can biologists with limited coding experience benefit?
   - How can developers build their own tools?
 
-# ** What is the "right" way to analyse morphological profiles?
+# *** What is the "right" way to analyse morphological profiles?
 # - What are previous analyses and their conclusions?
 # - How can we evaluate
 
-** Some user stories of biologists
+* We aim to help biologists further their research
+** Some use cases
 :PROPERTIES:
 :BEAMER_ACT: [<+>]
 :END:
@@ -66,22 +73,22 @@
 =broad_babel=: Translates IDs (JUMP, Symbol/InChiKey, Entrez id, Broad) and which are controls.
 [[./imgs/babel.jpg]]
 
-** The tools can be organised based on question and dataset...
+** Summary of all websites
 :PROPERTIES:
 :BEAMER_opt: shrink=35
 :END:
 
-|                |                       |                      |                  |
-|                |                       |                      |                  |
-|                |                       |                      |                  |
-|                |                       |                      |                  |
-| Perturbation   | Similar perturbations | Distinctive features | Images           |
-|----------------+-----------------------+----------------------+------------------|
-| Overexpression | [[https://broad.io/orf][orf]]                   | [[https://broad.io/orf_feature][orf_feature]]          | [[https://broad.io/orf_gallery][orf_gallery]]      |
-| Knocked-Out    | [[https://broad.io/crispr][crispr]]                | [[https://broad.io/crispr_feature][crispr_feature]]       | [[https://broad.io/crispr_gallery][crispr_gallery]]   |
-| Compound       | [[https://broad.io/compound][compound]]              | [[https://broad.io/compound_feature][compound_feature]]     | [[https://broad.io/compound_gallery][compound_gallery]] |
-|                |                       |                      |                  |
-|                |                       |                      |                  |
+|                |                                     |                                               |                                                         |
+|                |                                     |                                               |                                                         |
+|                |                                     |                                               |                                                         |
+|                |                                     |                                               |                                                         |
+| Perturbation   | Similar perturbations               | Distinctive features                          | Images                                                  |
+|----------------+-------------------------------------+-----------------------------------------------+---------------------------------------------------------|
+| Overexpression | [[https://broad.io/orf][orf]]       | [[https://broad.io/orf_feature][orf_feature]] | [[https://broad.io/orf_gallery][orf_gallery]]           |
+| Knocked-Out    | [[https://broad.io/crispr][crispr]] | WIP                                           | [[https://broad.io/crispr_gallery][crispr_gallery]]     |
+| Compound       | WIP                                 | WIP                                           | [[https://broad.io/compound_gallery][compound_gallery]] |
+|                |                                     |                                               |                                                         |
+|                |                                     |                                               |                                                         |
 
 #+begin_src latex :export results
 \begin{large}
@@ -89,45 +96,10 @@ For example:\\
 - broad.io/orf\\
 - broad.io/orf\_feature\\
 - broad.io/orf\_gallery\\[1in]
-\begin{center}(Broad shortlinks are an underused asset. Keep it low-key.)\end{center}
 \end{large}
 #+end_src
 
-** ...or as a decision flowchart
-
-#+begin_src mermaid :file imgs/flowchart_jump_rr.png :exports results :results replace
-%%{init: {
-'theme': 'forest',
-"flowchart" : { "curve" : "basis" },
-"themeVariables": {"fontSize": "150px"}
-} }%%
-flowchart LR
-    A[I want morphological \n info of perturbation X] --> B{Genetic or \n Chemical?}
-    B -- Genetic --> D{Overexpression \n or Knock-Out?}
-    B -- Both --> Z[(WIP)]
-    B -- Chemical --> compounds{What kind of data?}
-    D -- Overexpression --> orf{What kind of data?}
-    D -- Knock-Out --> crispr{What kind of data?}
-    orf -- Perturbations -->  F[(broad.io/orf)]
-    orf -- Features -->  G[(broad.io/orf_feature)]
-    orf -- Images -->  G[(broad.io/orf_gallery)]
-    crispr -- Similar perturbations -->  H[(broad.io/crispr)]
-    crispr -- Distinctive features --> I[(broad.io/crispr_feature)]
-    crispr -- Images -->  G[(broad.io/crispr_gallery)]
-    compounds -- Similar perturbations -->  K[(broad.io/compound)]
-    compounds -- Distinctive features --> L[(broad.io/compound_feature)]
-    compounds -- Images -->  M[(broad.io/compound_gallery)]
-#+end_src
-
-#+RESULTS:
-[[file:imgs/flowchart_jump_rr.png]]
-
-** Ok, that's "fun" and all, but what about developer experience?
-pandas! pandas! pandas!
-\\
-The following tools are available via pip.
-
-** =broad_babel=: Three SQL wrappers in a trenchcoat.
+** =broad_babel=: Translate gene and compound names, and what type of treatment they are
 Tool to translate its and provides essential information.
 - ID goes in, ID(s) come out
 - ID goes in, control metadata comes out
@@ -137,32 +109,35 @@ It doubles as a central accessible source of ground truth for identities and met
 ** =jump_portrait=: Spice-up your workflow with cell images
 
 Fetch a subset of images associated to a perturbation. Optionally, include their respective negative controls.
-- Foci-level images are accesible, not single-cell.
+- Site-level images
 - Negative controls is essential to account for +batch effects+.
 - Useful to train Deep Learning models on images on-the-fly(?).
 
 ** Other nice JUMP-adjacent tools
-- jump-dti: Fetch data from drug-target interaction (@John)
-- cpg-data: Fetch images for any CellPainting data (@Ank)
-- SMILES without borders: Cheminformatics black magic (@Srijit)
+- jump-dti: Fetch data from drug-target interaction
+- cpg-data: Fetch images for any CellPainting data
 
-** Aren't you just procrastinating the dive into biology?
-\pause
-#+begin_center
-#+latex: {\Huge{Perhaps.}}
-#+end_center
-
-** So, we need biology vignettes
-# :PROPERTIES:
-# :BEAMER_ACT: [<+->]
-# :END:
-Or at least tutorials/documentation for others to make their own
-\pause
-\\
-#+latex: {\large{¿Por qué no los dos?}}
-\\
-As a side-note, it would be neat not to suffer an overdose of .ipynb
-
-** JUMP central concentrates knowledge, including (battle-proven) code to keep the evergrowing info in a leash.
+** JUMP central concentrates knowledge
 [[./imgs/jump_central.jpg]]
 
+* All of JUMP in one place
+* Final remarks
+** Conclusions
+- Big projects beget big complex systems, there is a way
+- Our current toolset makes it much easier to leverage datasets
+** September Hackathon
+[[./imgs/poster.jpg]]
+
+
+** Acknowledgements
+- Carpenter-Singh Lab
+  Anne carpenter
+  Shantanu Singh
+  Adit Shah
+  Ankur Kumar
+  Alex Kalinin
+  Niranj
+  John Arevalo
+
+- Cimini Lab
+  Beth Cimini
