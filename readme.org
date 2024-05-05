@@ -16,8 +16,12 @@ Once the slides are ready they are autoconverted into keynote
 pdf2keynote slides.pdf
 #+end_src
 Finally add the demos where they should be.
+
 * Video format
 Note that videos have to be encoded in H264 for them to be accepted by Keynote. Something along these lines works.
 #+begin_src
 ffmpeg -i input.fmt -vcodec libx264 -acodec aac output.mov
 #+end_src
+
+* Is keynote crashing?
+If keynote crashes after adding the videos (which is very frustrating given all the previous work) just export to pptx and show it using MS PowerPoint :/. I will come up with a solution in a future slide set based on this one, probably anyways.
