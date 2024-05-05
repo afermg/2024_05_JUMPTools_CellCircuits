@@ -5,13 +5,28 @@
 #+BEAMER_FRAME_LEVEL: 2
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
 
-* JUMP Cell Painting
-** Scale and diversity of the data poses a challenge
-We produced multipletypes of data.
-- Images
-- Processed morphological profiles
-- Metadata linking images and profiles
-- Notebooks, tools and tutorials
+* Introduction: Turns out high content imaging is hard.
+** The JUMP-CP Consortium produced large diverse datasets
+*** Left :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+- Raw images
+#+ATTR_LATEX: :width 1.0\textwidth
+[[./imgs/cellpainting.png]]
+- Metadata tables
+#+ATTR_LATEX: :width 1.0\textwidth
+[[./imgs/metadata_table.png]]
+*** Right :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+- Morphological profiles
+#+ATTR_LATEX: :width 1.0\textwidth
+[[./imgs/profile_diagram.png]]
+- Notebooks
+#+ATTR_LATEX: :width 1.0\textwidth
+[[./imgs/notebook.png]]
 
 ** Why is this a problem of scale?
 # :PROPERTIES:
@@ -30,10 +45,6 @@ We produced multipletypes of data.
   - How can biologists with limited coding experience benefit?
   - How can developers build their own tools?
 
-# *** What is the "right" way to analyse morphological profiles?
-# - What are previous analyses and their conclusions?
-# - How can we evaluate
-
 * We aim to help scientists further their research
 ** We use our own use-cases to make the data useful
 :PROPERTIES:
@@ -50,24 +61,37 @@ We produced multipletypes of data.
 :PROPERTIES:
 :BEAMER_ACT: [<+>]
 :END:
-=jump_rr= (JUMP Round-Robin) is our Python tool to perform pairwise computations on profiles or features using the GPU. It also processes metadata to build whole image paths.
+- *Process data*: =jump_rr= (JUMP Round-Robin) is our tool to perform pairwise computations on profiles and their metadata on GPUs.
 
-=Datasette= is a Python libary to visualise, query and edit databases.
+- *Publish results*: =Datasette= is a Python libary to visualise, query and edit databases.
 
 ** What else produces similar morphologies?
+:PROPERTIES:
+:BEAMER_ACT: [<+->]
+:END:
 =matches=: Find the most similar (and dissimilar) perturbations.
+#+ATTR_LATEX: :width 0.9\textwidth
+[[./imgs/simile.jpg]]
 ** What else produces similar morphologies?
-# [[./demos/crispr_match.mp4]]
 ** What are the distinctive features of *X*-perturbed cells?
+:PROPERTIES:
+:BEAMER_ACT: [<+->]
+:END:
 =feature=: Find the most distinctive features of a perturbation, or amongst all.
+#+ATTR_LATEX: :width 0.9\textwidth
+[[./imgs/feature.jpg]]
 ** What are the distinctive features of *X*-perturbed cells?
-# [[./demos/orf_feature.mp4]]
 ** How do cells affected by *X* look?
 =gallery=: Explore all the images with an associated profile.
+#+ATTR_LATEX: :width 0.9\textwidth
+[[./imgs/gallery.jpg]]
+:PROPERTIES:
+:BEAMER_ACT: [<+->]
+:END:
 ** How do cells affected by *X* look?
-# [[./demos/compound_gallery.mp4]]
 ** Does *X* have a different name in other databases?
 =broad_babel=: Translates IDs (JUMP, Symbol/InChiKey, Entrez id, Broad) and which are controls.
+#+ATTR_LATEX: :width 0.9\textwidth
 [[./imgs/babel.jpg]]
 
 ** To summarise the available data
@@ -75,63 +99,103 @@ We produced multipletypes of data.
 :BEAMER_opt: shrink=35
 :END:
 
-|                |                                     |                                               |                                                         |
-|                |                                     |                                               |                                                         |
-|                |                                     |                                               |                                                         |
-|                |                                     |                                               |                                                         |
-| Perturbation   | Match perturbations                 | Distinctive features                          | Images                                                  |
-|----------------+-------------------------------------+-----------------------------------------------+---------------------------------------------------------|
-| Overexpression | [[https://broad.io/orf][orf]]       | [[https://broad.io/orf_feature][orf_feature]] | [[https://broad.io/orf_gallery][orf_gallery]]           |
-| Knocked-Out    | [[https://broad.io/crispr][crispr]] | WIP                                           | [[https://broad.io/crispr_gallery][crispr_gallery]]     |
-| Compound       | WIP                                 | WIP                                           | [[https://broad.io/compound_gallery][compound_gallery]] |
-|                |                                     |                                               |                                                         |
-|                |                                     |                                               |                                                         |
+|                |                     |                      |                  |
+|                |                     |                      |                  |
+|                |                     |                      |                  |
+|                |                     |                      |                  |
+| Perturbation   | Match perturbations | Distinctive features | Images           |
+|----------------+---------------------+----------------------+------------------|
+| Overexpression | [[https://broad.io/orf][orf]]                 | [[https://broad.io/orf_feature][orf_feature]]          | [[https://broad.io/orf_gallery][orf_gallery]]      |
+| Knocked-Out    | [[https://broad.io/crispr][crispr]]              | *WIP*                | [[https://broad.io/crispr_gallery][crispr_gallery]]   |
+| Compound       | *WIP*               | *WIP*                | [[https://broad.io/compound_gallery][compound_gallery]] |
+|                |                     |                      |                  |
+|                |                     |                      |                  |
 
 #+begin_src latex :export results
 \begin{large}
 For example:\\
 - broad.io/orf\\
 - broad.io/orf\_feature\\
-- broad.io/orf\_gallery\\[1in]
+- broad.io/orf\_gallery\\[0.5in]
+
+Additionally, a table with all the available gene and their other ids:\\
+- broad.io/babel
+
 \end{large}
 #+end_src
 
-** =broad_babel=: Translate gene and compound names, and what type of treatment they are
-Tool to translate its and provides essential information.
-- ID goes in, ID(s) come out
-- ID goes in, control metadata comes out
+** =broad_babel=: Obtain metadata
+Translates identifiers and provides essential metadata.
+- What is the NCBI id of this gene?
+- Is *X* perturbation a treatment or a control?
 
-It doubles as a central accessible source of ground truth for identities and metadata.
+It doubles as a single source of metadata ground truth.
 
 ** =jump_portrait=: Spice-up your workflow with cell images
 
 Fetch a subset of images associated to a perturbation. Optionally, include their respective negative controls.
-- Site-level images
-- Negative controls is essential to account for +batch effects+.
-- Useful to train Deep Learning models on images on-the-fly(?).
+- Images at the site level
+- Include plate-specific negative controls, to account for batch effects.
+- Can be used to train ML/DL models on images by-request.
 
 ** Other nice JUMP-adjacent tools
-- jump-dti: Fetch data from drug-target interaction
-- cpg-data: Fetch images for any CellPainting data
+- jump-dti: Aggregate drug-target interaction databases
+- cpg-data: Fetch images of Cell Painting Gallery
 
 * Final remarks
 ** JUMP central concentrates knowledge
 [[./imgs/jump_central.jpg]]
+
+** We are working on publishing biological vignettes to showcase the use of morphological data
+#+ATTR_LATEX: :width 0.9\textwidth
+[[./imgs/jump_stories_github_issues.png]]
 ** Conclusions
-- Big projects beget big complex systems, there is a way
-- Our current toolset makes it much easier to leverage datasets
-** We will host a JUMP Hackathon in September
+We built tools to solve our challenges and help scientists:
+- Web tools for experimentalists to explore their perturbations of interest
+- Python libraries for software inclined folks to integrate into their workflows
+- A general framework to facilitate sharing results and learning material
+
+** Shameless plug: September JUMP Hackathon
+#+ATTR_LATEX: :width 0.6\textwidth
 [[./imgs/poster.jpg]]
+
+** Resources
+- *JUMP CP Consortium:* [[https://jump-cellpainting.broadinstitute.org/][jump-cellpainting.broadinstitute.org]]
+- *JUMP information central:* [[https://broad.io/jump][broad.io/jump]]
+- *Imaging Platform's monorepo:* [[https://broad.io/monorepo][broad.io/monorepo]]
+- *Slides:* [[http://github.com/afermg/2024_05_JUMPTools_CellCircuits][github.com/afermg/2024_05_JUMPTools_CellCircuits]]
+
 ** Acknowledgements
-*** Imaging Platform
+*** CS Lab :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+**** Carpenter-Singh Lab
   - Anne carpenter
   - Shantanu Singh
-  - Adit Shah
-  - Ankur Kumar
-  - Alex Kalinin
-  - Niranj
+  - Niranj Chandrasekaran
   - John Arevalo
-  - Beth Cimini
+  - Sam Chen
+  - Ankur Kumar
+  - Ellen Su
+  - Alex Kalinin
+  - Adit Shah
 
-*** .
+*** Pictures :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.4
+:END:
+#+ATTR_LATEX: :width 1.1\textwidth
 [[./imgs/elevator_selfie.jpg]]
+#+ATTR_LATEX: :width 0.5\textwidth
+[[./imgs/broad_logo.png]]
+#+ATTR_LATEX: :width 1.2\textwidth
+[[./imgs/jump_partners.png]]
+
+
+* org-beamer-mode :noexport:
+Ensure org-beamer-mode upon save
+# local variables:
+# eval: (advice-add #'org-export-get-reference :override #'org-export-get-reference)
+# eval: (org-beamer-mode)
+# end:
