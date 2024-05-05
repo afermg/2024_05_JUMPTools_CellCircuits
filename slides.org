@@ -1,5 +1,7 @@
 #+title: Diving into JUMP Cell Painting data: Facilitating novel discoveries through accessible tools
 #+OPTIONS: ^:nil H:2 num:t toc:nil
+#+DATE: 2024/05/06
+#+Author: Alán F. Muñoz
 #+LaTeX_CLASS: beamer
 #+BEAMER_THEME: metropolis
 #+BEAMER_FRAME_LEVEL: 2
