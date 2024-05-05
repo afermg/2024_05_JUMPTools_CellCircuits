@@ -1,0 +1,18 @@
+#+title: Readme
+
+For this particular slides I use demos, so I use pdf2keynote to insert mp4s manually.
+Either use =nix flakes + direnv= for an automated setup or run the setup.
+
+* Setup
+#+begin_src shell
+python -m venv .venv
+direnv allow .
+pip install git+https://github.com/remymuller/pdf2keynote.git
+#+end_src
+
+* Usage
+Once the slides are ready they are autoconverted into keynote
+#+begin_src shell
+pdf2keynote slides.pdf
+#+end_src
+Finally add the demos where they should be.
